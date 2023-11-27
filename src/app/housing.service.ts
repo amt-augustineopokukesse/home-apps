@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HousingLocation } from './housing-location';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HousingService {
   url = 'http://localhost:3000/locations';
-  constructor() { }
+  constructor(private router: Router) { }
 
   async getAllHousingLocations() : Promise<HousingLocation[]> {
     const data = await fetch(this.url);
@@ -19,6 +20,7 @@ export class HousingService {
   }
   submitApplication(firstName: string, lastName: string, email: string) {
     console.log(firstName, lastName, email);
+    this.router.navigateByUrl('/confirmed');
   }
 
 }
